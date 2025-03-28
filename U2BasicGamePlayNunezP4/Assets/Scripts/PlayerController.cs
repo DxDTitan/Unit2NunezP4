@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
     public float speed = 10.0f;
-    public float xRange = 10.0f;
+    public float xRange = 15f;
+    public float vertical;
 
     public GameObject projectilePrefab;
 
@@ -32,9 +33,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
+
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        horizontalInput = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
+        transform.Translate(horizontalInput * speed * Time.deltaTime * Vector3.right);
+        transform.Translate(vertical * speed * Time.deltaTime * Vector3.forward);
 
     }
 }
